@@ -15,7 +15,7 @@ import { BREAK_POINTS } from 'v2/theme';
 import TransactionDetailsDisplay from './displays/TransactionDetailsDisplay';
 import TxIntermediaryDisplay from './displays/TxIntermediaryDisplay';
 import { convertToFiat, truncate } from 'v2/utils';
-import translate from 'v2/translations';
+import translate, { translateRaw } from 'v2/translations';
 import { TSymbol } from 'v2/types/symbols';
 import Account from '../Account';
 import { StoreAccount } from 'v2/types/account';
@@ -53,8 +53,6 @@ const ColumnWrapper = Styled.div<{ bold?: boolean }>`
 `;
 
 const SendButton = Styled(Button)`
-  width: 100%;
-
   > div {
     justify-content: center;
   }
@@ -284,7 +282,7 @@ export const ConfirmTransactionUI = ({
         className="ConfirmTransaction-button"
         loading={isBroadcastingTx}
       >
-        {translate('CONFIRM_AND_SEND')}
+        {isBroadcastingTx ? translateRaw('SUBMITTING') : translateRaw('CONFIRM_AND_SEND')}
       </SendButton>
     </ConfirmTransactionWrapper>
   );
